@@ -8,7 +8,10 @@ export const db = mysql.createPool({
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
   waitForConnections: true,
-  connectionLimit: 10
+  connectionLimit: 10,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 export async function checkDbConnection() {

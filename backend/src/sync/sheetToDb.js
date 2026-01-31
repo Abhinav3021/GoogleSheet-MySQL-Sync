@@ -29,8 +29,12 @@ export async function syncSheetToDb({ sheetsClient }) {
     const existing = await getRowById(id);
 
     if (!existing) {
-      await upsertRow({ id, rowJson: row, rowHash });
-      inserted++;
+      try {
+        await upsertRow({ id, rowJson: row, rowHash, source: "sheet", traceId: `sheet-${Date.now()}` });
+        inserted++;
+      } catch (err) {
+        logger.error({ err, id }, "❌ Failed Sheet→DB upsert");
+      }
 
       broadcastEvent({
         type: "sheet_to_db_insert",
