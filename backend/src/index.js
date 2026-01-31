@@ -17,6 +17,8 @@ import { dbReadRouter } from "./routes/dbRead.js";
 import { dbDeleteRouter } from "./routes/dbDelete.js";
 import { outboxRouter } from "./routes/outbox.js";
 import { sheetOpsRouter } from "./routes/sheetOps.js";
+import { debugRouter } from "./routes/debug.js";
+import {sheetDebugRouter} from "./routes/debug_sheet.js";
 
 
 
@@ -36,6 +38,8 @@ app.use("/api", dbReadRouter);
 app.use("/api", dbDeleteRouter);
 app.use("/api", outboxRouter);
 app.use("/api", sheetOpsRouter);
+app.use("/api", debugRouter);
+app.use("/api", sheetDebugRouter);
 
 
 app.get("/", (req, res) => {
